@@ -1,10 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Stories.Data.Entities.Mappings
 {
     public class UserBanMap : IEntityTypeConfiguration<UserBan>
     {
-        public void Map(EntityTypeBuilder<UserBan> builder)
+        public void Configure(EntityTypeBuilder<UserBan> builder)
         {
             builder.HasKey(ub => ub.Id);
             builder.Property(ub => ub.UserId).IsRequired();

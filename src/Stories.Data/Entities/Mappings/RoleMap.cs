@@ -1,10 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Stories.Data.Entities.Mappings
 {
     public class RoleMap : IEntityTypeConfiguration<Role>
     {
-        public void Map(EntityTypeBuilder<Role> builder)
+        public void Configure(EntityTypeBuilder<Role> builder)
         {
             builder.HasKey(r => r.Id);            
         }

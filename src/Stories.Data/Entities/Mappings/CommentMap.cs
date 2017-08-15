@@ -1,10 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Stories.Data.Entities.Mappings
 {
     public class CommentMap : IEntityTypeConfiguration<Comment>
     {
-        public void Map(EntityTypeBuilder<Comment> builder)
+        public void Configure(EntityTypeBuilder<Comment> builder)
         {
             builder.HasKey(c => c.Id);
             builder.Property(c => c.StoryId).IsRequired();

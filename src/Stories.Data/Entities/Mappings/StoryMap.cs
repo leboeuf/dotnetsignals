@@ -1,10 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Stories.Data.Entities.Mappings
 {
     public class StoryMap : IEntityTypeConfiguration<Story>
     {
-        public void Map(EntityTypeBuilder<Story> builder)
+        public void Configure(EntityTypeBuilder<Story> builder)
         {
             builder.HasKey(s => s.Id);
             builder.Property(s => s.Url);

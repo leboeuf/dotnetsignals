@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Stories.Data.Entities.Mappings;
 using System;
 
 namespace Stories.Data.Extensions
@@ -11,7 +10,7 @@ namespace Stories.Data.Extensions
         where TEntity : class
         {
             var mapper = (IEntityTypeConfiguration<TEntity>)Activator.CreateInstance(typeof(TMapping));
-            mapper.Map(builder.Entity<TEntity>());
+            mapper.Configure(builder.Entity<TEntity>());
             return builder;
         }
     }

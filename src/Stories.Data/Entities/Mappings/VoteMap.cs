@@ -1,10 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Stories.Data.Entities.Mappings
 {
     public class VoteMap : IEntityTypeConfiguration<Vote>
     {
-        public void Map(EntityTypeBuilder<Vote> builder)
+        public void Configure(EntityTypeBuilder<Vote> builder)
         {
             builder.HasKey(e => e.Id);
             builder.Property(v => v.UserId).IsRequired();

@@ -1,10 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Stories.Data.Entities.Mappings
 {
     public class UserMap : IEntityTypeConfiguration<User>
     {
-        public void Map(EntityTypeBuilder<User> builder)
+        public void Configure(EntityTypeBuilder<User> builder)
         {
             builder.HasKey(u => u.Id);
             builder.HasIndex(u => u.Email);

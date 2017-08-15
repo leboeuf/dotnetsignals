@@ -1,10 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Stories.Data.Entities.Mappings
 {
     public class UserRoleMap : IEntityTypeConfiguration<UserRole>
     {
-        public void Map(EntityTypeBuilder<UserRole> builder)
+        public void Configure(EntityTypeBuilder<UserRole> builder)
         {
             builder.HasKey(ur => new { ur.RoleId, ur.UserId });
             builder.Property(ur => ur.RoleId).IsRequired();

@@ -1,10 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Stories.Data.Entities.Mappings
 {
     public class RefferalMap : IEntityTypeConfiguration<Referral>
     {
-        public void Map(EntityTypeBuilder<Referral> builder)
+        public void Configure(EntityTypeBuilder<Referral> builder)
         {
             builder.HasKey(r => r.Id);
             builder.HasAlternateKey(r => r.Email);
