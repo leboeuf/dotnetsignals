@@ -2,7 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using NLog.Extensions.Logging;
+//using NLog.Extensions.Logging;
 using Stories.Data.DbContexts;
 using Stories.Ranking.Services;
 using System;
@@ -71,8 +71,8 @@ namespace Stories.Jobs.RankStories
             ServiceProvider = services.BuildServiceProvider();
 
             var loggerFactory = ServiceProvider.GetService<ILoggerFactory>();
-            loggerFactory.AddNLog();
-            loggerFactory.ConfigureNLog("nlog.config");
+            //loggerFactory.AddNLog();
+            //loggerFactory.ConfigureNLog("nlog.config");
         }
     }
 }
