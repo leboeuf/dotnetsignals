@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Controllers;
@@ -7,8 +8,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using NLog.Extensions.Logging;
-using NLog.Web;
+//using NLog.Extensions.Logging;
+//using NLog.Web;
 using SimpleInjector;
 using SimpleInjector.Integration.AspNetCore.Mvc;
 using SimpleInjector.Lifestyles;
@@ -46,7 +47,7 @@ namespace Stories
                 builder.AddApplicationInsightsSettings(developerMode: true);
             }
 
-            env.ConfigureNLog("nlog.config");
+            //env.ConfigureNLog("nlog.config");
 
             builder.AddEnvironmentVariables();
             Configuration = builder.Build();
@@ -57,7 +58,12 @@ namespace Stories
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                    .AddCookie(o => {
+                        o.LoginPath = new PathString("/auth/login");
+                        o.AccessDeniedPath = new PathString("/auth/login");
+                        o.ReturnUrlParameter = "returnUrl";
+                    });
             // Add framework services.
             services.AddApplicationInsightsTelemetry(Configuration);
 
@@ -75,21 +81,21 @@ namespace Stories
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
-            app.UseCookieAuthentication(new CookieAuthenticationOptions
-            {
-                AuthenticationScheme = "StoriesCookieAuthentication",
-                LoginPath = new PathString("/auth/login"),
-                AccessDeniedPath = new PathString("/auth/login"),
-                AutomaticAuthenticate = true,
-                AutomaticChallenge = true,
-                ReturnUrlParameter = "returnUrl"
-            });
+            //app.UseCookieAuthentication(new CookieAuthenticationOptions
+            //{
+            //    AuthenticationScheme = "StoriesCookieAuthentication",
+            //    LoginPath = new PathString("/auth/login"),
+            //    AccessDeniedPath = new PathString("/auth/login"),
+            //    AutomaticAuthenticate = true,
+            //    AutomaticChallenge = true,
+            //    ReturnUrlParameter = "returnUrl"
+            //});            
 
             container.Options.DefaultScopedLifestyle = new AsyncScopedLifestyle();
 
             InitializeContainer(app);
 
-            loggerFactory.AddNLog();
+            //loggerFactory.AddNLog();
 
             // Todo: This has some setup to do so we can start monitoring
             // https://blogs.msdn.microsoft.com/webdev/2015/05/19/application-insights-for-asp-net-5-youre-in-control/
@@ -115,7 +121,7 @@ namespace Stories
 
             // Add external authentication middleware below. To configure them please see http://go.microsoft.com/fwlink/?LinkID=532715
 
-            app.AddNLogWeb();
+            //app.AddNLogWeb();
 
             app.UseMvc(routes =>
             {
