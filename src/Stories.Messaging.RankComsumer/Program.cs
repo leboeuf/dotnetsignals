@@ -55,7 +55,7 @@ namespace Stories.Messaging.RankComsumer
 
                     for (var i = 0; i < 20; i++)
                     {
-                        var result = model.BasicGet(RabbitMQQueues.Stories, noAck: false); // NoAck aka, True to auto ack message, false to noack..
+                        var result = model.BasicGet(RabbitMQQueues.Stories, autoAck: false); // NoAck aka, True to auto ack message, false to noack..
 
                         if (result == null)
                             break;
@@ -92,7 +92,7 @@ namespace Stories.Messaging.RankComsumer
 
                     for (var i = 0; i < 20; i++)
                     {
-                        var result = model.BasicGet(RabbitMQQueues.Comments, noAck: false);
+                        var result = model.BasicGet(RabbitMQQueues.Comments, autoAck: false);
 
                         if (result == null)
                             break;
